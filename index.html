@@ -1,0 +1,549 @@
+from IPython.display import HTML, display
+
+site = r"""
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erasmus Journey | Avrupa Seni Bekliyor</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #172747;
+    background: #f5f8ff;
+    line-height: 1.7;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 8%;
+    background: #102b69;
+    color: white;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffda44;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #ffda44;
+}
+
+.hero {
+    min-height: 490px;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    color: white;
+    background: linear-gradient(120deg, #102b69, #2865bc);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.eyebrow {
+    color: #ffda44;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 13px;
+}
+
+h1 {
+    font-size: clamp(38px, 5vw, 61px);
+    line-height: 1.15;
+    margin: 20px 0;
+}
+
+.hero p {
+    color: #e0e9ff;
+    margin-bottom: 28px;
+    font-size: 17px;
+}
+
+.btn {
+    display: inline-block;
+    background: #ffda44;
+    color: #102b69;
+    padding: 13px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+.hero-visual {
+    width: 330px;
+    min-width: 250px;
+    height: 330px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ffda44, #ffefaa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    box-shadow: 0 15px 50px #091b4855;
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 34px;
+    color: #102b69;
+    margin-bottom: 10px;
+}
+
+.section-desc {
+    text-align: center;
+    color: #69758c;
+    margin-bottom: 40px;
+}
+
+.countries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.country {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #142b5010;
+    transition: 0.3s;
+}
+
+.country:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px #142b5020;
+}
+
+.country-visual {
+    height: 155px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 68px;
+}
+
+.italy { background: #e3f5e9; }
+.spain { background: #fff0dc; }
+.france { background: #e4ebff; }
+.germany { background: #f2e6df; }
+
+.country-info {
+    padding: 22px;
+}
+
+.country h3 {
+    color: #102b69;
+    margin-bottom: 8px;
+}
+
+.country p {
+    color: #69758c;
+    font-size: 14px;
+}
+
+.benefits {
+    background: #eaf0ff;
+}
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.benefit {
+    background: white;
+    border-radius: 14px;
+    padding: 30px 24px;
+    text-align: center;
+}
+
+.benefit-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.benefit h3 {
+    margin-bottom: 10px;
+    color: #102b69;
+}
+
+.benefit p {
+    color: #69758c;
+    font-size: 14px;
+}
+
+.steps {
+    max-width: 760px;
+    margin: auto;
+}
+
+.step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 22px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 12px;
+    border-left: 5px solid #ffda44;
+    box-shadow: 0 4px 15px #142b5009;
+}
+
+.step-number {
+    min-width: 42px;
+    height: 42px;
+    background: #102b69;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.step h3 {
+    color: #102b69;
+    margin-bottom: 5px;
+}
+
+.step p {
+    color: #69758c;
+    font-size: 14px;
+}
+
+.cta {
+    text-align: center;
+    color: white;
+    background: linear-gradient(120deg, #102b69, #2865bc);
+}
+
+.cta h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: #e0e9ff;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+footer {
+    text-align: center;
+    padding: 28px 8%;
+    color: #d7e2ff;
+    background: #0b1d49;
+    font-size: 13px;
+}
+
+footer a {
+    color: #ffda44;
+}
+
+@media (max-width: 900px) {
+    .countries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-visual {
+        width: 240px;
+        min-width: 200px;
+        height: 240px;
+        font-size: 90px;
+    }
+}
+
+@media (max-width: 650px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 65px 6%;
+    }
+
+    .hero-visual {
+        width: 190px;
+        min-width: 190px;
+        height: 190px;
+        font-size: 75px;
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+
+    .countries,
+    .benefit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title,
+    .cta h2 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✈ Erasmus<span>Journey</span></div>
+
+    <nav>
+        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#ulkeler">Ülkeler</a>
+        <a href="#avantajlar">Avantajlar</a>
+        <a href="#basvuru">Başvuru Rehberi</a>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero" id="anasayfa">
+    <div class="hero-content">
+        <div class="eyebrow">AVRUPA'YI KEŞFET • KENDİNİ GELİŞTİR</div>
+
+        <h1>Bir Dönem,<br>Binlerce <span style="color:#ffda44">
+        Yeni Deneyim!</span></h1>
+
+        <p>
+            Erasmus+ ile farklı ülkelerde eğitim al, yeni kültürler
+            keşfet, yabancı dilini geliştir ve hayatın boyunca
+            unutamayacağın anılar biriktir.
+        </p>
+
+        <a class="btn" href="#basvuru">Yolculuğunu Planla →</a>
+    </div>
+
+    <div class="hero-visual">🌍</div>
+</section>
+
+<section id="ulkeler">
+    <h2 class="section-title">Avrupa Seni Bekliyor</h2>
+    <p class="section-desc">
+        Yeni bir kültür, yeni arkadaşlıklar ve yeni bir başlangıç.
+    </p>
+
+    <div class="countries">
+
+        <article class="country">
+            <div class="country-visual italy">🏛️</div>
+            <div class="country-info">
+                <h3>🇮🇹 İtalya</h3>
+                <p>
+                    Tarihi şehirleri, sanatı, mimarisi ve eşsiz
+                    mutfağıyla unutulmaz bir öğrenci deneyimi.
+                </p>
+            </div>
+        </article>
+
+        <article class="country">
+            <div class="country-visual spain">☀️</div>
+            <div class="country-info">
+                <h3>🇪🇸 İspanya</h3>
+                <p>
+                    Sıcak iklimi, canlı sosyal hayatı ve renkli
+                    kültürüyle Avrupa'yı keşfet.
+                </p>
+            </div>
+        </article>
+
+        <article class="country">
+            <div class="country-visual france">🗼</div>
+            <div class="country-info">
+                <h3>🇫🇷 Fransa</h3>
+                <p>
+                    Sanatın, modanın ve kültürün merkezinde
+                    eğitim alarak ufkunu genişlet.
+                </p>
+            </div>
+        </article>
+
+        <article class="country">
+            <div class="country-visual germany">🏰</div>
+            <div class="country-info">
+                <h3>🇩🇪 Almanya</h3>
+                <p>
+                    Güçlü akademik gelenekleri ve teknoloji
+                    odaklı şehirleriyle yeni fırsatlar keşfet.
+                </p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<section class="benefits" id="avantajlar">
+    <h2 class="section-title">Neden Erasmus+?</h2>
+    <p class="section-desc">
+        Erasmus yalnızca bir eğitim programı değil, kişisel bir gelişim yolculuğudur.
+    </p>
+
+    <div class="benefit-grid">
+
+        <article class="benefit">
+            <div class="benefit-icon">🗣️</div>
+            <h3>Yabancı Dil</h3>
+            <p>
+                Farklı dillerde iletişim kurarak dil becerilerini
+                ve kendine güvenini geliştirebilirsin.
+            </p>
+        </article>
+
+        <article class="benefit">
+            <div class="benefit-icon">🤝</div>
+            <h3>Uluslararası Arkadaşlık</h3>
+            <p>
+                Dünyanın farklı yerlerinden öğrencilerle
+                tanışıp kalıcı dostluklar kurabilirsin.
+            </p>
+        </article>
+
+        <article class="benefit">
+            <div class="benefit-icon">🎓</div>
+            <h3>Akademik Gelişim</h3>
+            <p>
+                Farklı eğitim sistemlerini deneyimleyerek
+                akademik ve mesleki ufkunu genişletebilirsin.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<section id="basvuru">
+    <h2 class="section-title">Erasmus Başvuru Rehberi</h2>
+    <p class="section-desc">
+        Hayalini gerçekleştirmek için temel adımları takip et.
+    </p>
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>
+                <h3>Üniversiteni Araştır</h3>
+                <p>
+                    Üniversitenin uluslararası ilişkiler veya Erasmus
+                    ofisinden anlaşmalı üniversiteler ve başvuru
+                    koşulları hakkında bilgi al.
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>
+                <h3>Başvuru Koşullarını Kontrol Et</h3>
+                <p>
+                    Akademik başarı, yabancı dil sınavı ve
+                    üniversitenin belirlediği diğer şartları incele.
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <div>
+                <h3>Belgelerini Hazırla</h3>
+                <p>
+                    Başvuru takvimine göre gerekli belgeleri,
+                    öğrenim planını ve diğer istenen evrakları hazırla.
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">4</div>
+            <div>
+                <h3>Yolculuğuna Hazırlan</h3>
+                <p>
+                    Kabul ve gerekli onaylardan sonra konaklama,
+                    seyahat, sigorta ve hibe süreçlerini planla.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Avrupa'daki Hikâyen Başlasın!</h2>
+    <p>
+        Erasmus+ fırsatlarını araştır, üniversitendeki başvuru
+        tarihlerini öğren ve kendi uluslararası deneyimini planla.
+    </p>
+    <a class="btn"
+       href="https://erasmus-plus.ec.europa.eu/"
+       target="_blank" rel="noopener noreferrer">
+       Resmî Erasmus+ Sitesi ↗
+    </a>
+</section>
+
+</main>
+
+<footer>
+    <p>✈ Erasmus Journey | Avrupa'yı keşfet, geleceğini şekillendir.</p>
+    <p>© 2026 • Eğitim amaçlı hazırlanmış tanıtım web sitesi.</p>
+</footer>
+
+</body>
+</html>
+"""
+
+display(HTML(site))
